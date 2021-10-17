@@ -8,7 +8,7 @@ var (
 
 func withRate() *prometheus.CounterVec {
 	r := prometheus.NewCounterVec(prometheus.CounterOpts{
-		Name: "doer_operation_count",
+		Name: "doer_operation_total",
 		Help: "The number of requests",
 	}, labels)
 
@@ -17,7 +17,7 @@ func withRate() *prometheus.CounterVec {
 
 func withError() *prometheus.CounterVec {
 	r := prometheus.NewCounterVec(prometheus.CounterOpts{
-		Name: "doer_error_count",
+		Name: "doer_error_total",
 		Help: "The number of those requests that have failed",
 	}, labels)
 
@@ -26,7 +26,7 @@ func withError() *prometheus.CounterVec {
 
 func withDuration() *prometheus.HistogramVec {
 	d := prometheus.NewHistogramVec(prometheus.HistogramOpts{
-		Name: "doer_duration_total",
+		Name: "doer_duration_seconds",
 		Help: "The amount of time those requests take",
 	}, labels)
 

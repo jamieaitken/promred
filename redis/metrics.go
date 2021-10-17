@@ -6,7 +6,7 @@ var labels = []string{"invoker", "operation"}
 
 func withRate() *prometheus.CounterVec {
 	r := prometheus.NewCounterVec(prometheus.CounterOpts{
-		Name: "redis_operation_count",
+		Name: "redis_operation_total",
 		Help: "The number of operations",
 	}, labels)
 
@@ -15,7 +15,7 @@ func withRate() *prometheus.CounterVec {
 
 func withError() *prometheus.CounterVec {
 	r := prometheus.NewCounterVec(prometheus.CounterOpts{
-		Name: "redis_error_count",
+		Name: "redis_error_total",
 		Help: "The number of those operations that have failed",
 	}, labels)
 
@@ -24,7 +24,7 @@ func withError() *prometheus.CounterVec {
 
 func withDuration() *prometheus.HistogramVec {
 	d := prometheus.NewHistogramVec(prometheus.HistogramOpts{
-		Name: "redis_duration_total",
+		Name: "redis_duration_seconds",
 		Help: "The amount of time those operations take",
 	}, labels)
 
