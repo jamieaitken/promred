@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@7.0.0
   go: circleci/go@1.6.0
+  codecov: codecov/codecov@3.2.0
 
 jobs:
   install-dependencies:
@@ -40,6 +41,9 @@ jobs:
           covermode: atomic
           failfast: true
           race: true
+          coverprofile: cover-source.txt
+      - codecov/upload:
+          file: cover-source.txt
 workflows:
   build:
     jobs:

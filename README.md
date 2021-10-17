@@ -1,4 +1,7 @@
-# Promred
+# PromRED
+[![CircleCI](https://circleci.com/gh/jamieaitken/promred/tree/main.svg?style=svg)](https://circleci.com/gh/jamieaitken/promred/tree/main)
+[![codecov](https://codecov.io/gh/jamieaitken/promred/branch/main/graph/badge.svg?token=5C0QQP4JE5)](https://codecov.io/gh/jamieaitken/promred)
+
 This package provides [RED Method](https://grafana.com/blog/2018/08/02/the-red-method-how-to-instrument-your-services/) 
 instrumentation via [Prometheus](https://prometheus.io/) for the following
 
