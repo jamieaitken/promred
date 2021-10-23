@@ -9,6 +9,10 @@ instrumentation via [Prometheus](https://prometheus.io/) for the following
 - [AWS SQS](#aws-sqs)
 - [Doers](#doers)
 - [Handlers](#handlers)
+- [Kafka](#kafka)
+  - [Heartbeater](#kafka-heartbeater)
+  - [Reader](#kafka-reader)
+  - [Writer](#kafka-writer)
 - [Redis](#redis)
 
 ## AWS SNS
@@ -76,7 +80,7 @@ httpClient := &http.Client{}
 
 instr := instrumentation.New(httpClient)
 
-request := http.NewRequestWithContext(context.Background, http.MethodGet, "https://example.com", nil)
+request := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://example.com", nil)
 
 res, err := instr.Do(request)
 if err != nil {
@@ -104,6 +108,75 @@ router := new(http.ServeMux)
 router.HandleFunc("/v1/docs", h.HandleFor(handler.Get))
 
 
+```
+
+## Kafka
+This can provide an instrumented Heartbeater, Reader and Writer from [segmentio/kafka-go](https://github.com/segmentio/kafka-go)
+
+### Kafka Heartbeater
+Available methods
+- Heartbeat
+
+#### How to use
+```go
+import (
+	instrumentation "github.com/jamieaitken/promred/kafka"
+	"github.com/segmentio/kafka-go"
+)
+
+client := kafka.Client{}
+
+instr := instrumentation.NewHeartbeater(client)
+
+res, err := instr.Heartbeat(context.Background(), &kafka.HeartbeatRequest{},"main")
+if err != nil {
+	return err
+}
+```
+
+
+### Kafka Reader
+Available methods
+- ReadMessage
+- Close
+
+#### How to use
+```go
+import (
+	instrumentation "github.com/jamieaitken/promred/kafka"
+	"github.com/segmentio/kafka-go"
+)
+
+reader := kafka.NewReader(kafka.ReaderConfig{})
+
+instr := instrumentation.NewReader(reader)
+
+msg, err := instr.ReadMessage(context.Background(), "main")
+if err != nil {
+	return err
+}
+```
+
+### Kafka Writer
+Available methods
+- WriteMessages
+- Close
+
+#### How to use
+```go
+import (
+	instrumentation "github.com/jamieaitken/promred/kafka"
+	"github.com/segmentio/kafka-go"
+)
+
+writer := kafka.Writer{}
+
+instr := instrumentation.NewWriter(writer)
+
+err := instr.WriteMessages(context.Background(), []kafka.Message{}, "main")
+if err != nil {
+	return err
+}
 ```
 
 ## Redis
