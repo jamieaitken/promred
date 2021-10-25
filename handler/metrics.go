@@ -13,6 +13,8 @@ func withRate() *prometheus.CounterVec {
 		Help: "The number of requests",
 	}, responseLabels)
 
+	prometheus.MustRegister(r)
+
 	return r
 }
 
@@ -21,6 +23,8 @@ func withError() *prometheus.CounterVec {
 		Name: "handler_error_total",
 		Help: "The number of those requests that have failed",
 	}, responseLabels)
+
+	prometheus.MustRegister(r)
 
 	return r
 }
