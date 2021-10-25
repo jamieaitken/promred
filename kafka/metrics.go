@@ -10,6 +10,8 @@ func withRate() *prometheus.CounterVec {
 		Help: "The number of operations",
 	}, labels)
 
+	prometheus.MustRegister(r)
+
 	return r
 }
 
@@ -18,6 +20,8 @@ func withError() *prometheus.CounterVec {
 		Name: "kafka_error_total",
 		Help: "The number of those operations that have failed",
 	}, labels)
+
+	prometheus.MustRegister(r)
 
 	return r
 }

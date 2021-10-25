@@ -12,6 +12,8 @@ func withRate() *prometheus.CounterVec {
 		Help: "The number of requests",
 	}, labels)
 
+	prometheus.MustRegister(r)
+
 	return r
 }
 
@@ -20,6 +22,8 @@ func withError() *prometheus.CounterVec {
 		Name: "sns_error_total",
 		Help: "The number of those requests that have failed",
 	}, labels)
+
+	prometheus.MustRegister(r)
 
 	return r
 }
